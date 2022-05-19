@@ -1,0 +1,2 @@
+Metaphone
+g2p-en
