@@ -11,9 +11,11 @@ g2p = G2p()
 def lev_arrays(s1, s2):
     if len(s1) < len(s2):
         return lev_arrays(s2, s1)
+
     # len(s1) >= len(s2)
     if len(s2) == 0:
         return len(s1)
+
     previous_row = range(len(s2) + 1)
     for i, c1 in enumerate(s1):
         current_row = [i + 1]
@@ -24,6 +26,7 @@ def lev_arrays(s1, s2):
             substitutions = previous_row[j] + (c1 != c2)
             current_row.append(min(insertions, deletions, substitutions))
         previous_row = current_row
+
     return previous_row[-1]
 
 
@@ -50,7 +53,7 @@ if transcribe_button:
 
         dist = lev_arrays(first_phonetic, second_phonetic)
         st.write(f'Levenshtein distance (applied on the phonemes): {dist}')
-        st.write(f'Average percentage error: {dist / np.average(len(first_phonetic), len(second_phonetic))}')
+        st.write(f'Average percentage error: {dist / np.average([len(first_phonetic), len(second_phonetic)])}')
 
     elif algo == 'Double Metaphone':
         first_phonetics = list(filter(len, doublemetaphone(first_input)))
@@ -76,7 +79,7 @@ if transcribe_button:
                     chosen_second_phonetic = phonetic2
 
         st.write(f'Chosen phonetic transcriptions for a minimum Levenshtein distance of {min_error}: {chosen_first_phonetic} and {chosen_second_phonetic}')
-        st.write(f'Average percentage error: {min_error / np.average(len(chosen_first_phonetic), len(chosen_second_phonetic))}')
+        st.write(f'Average percentage error: {min_error / np.average([len(chosen_first_phonetic), len(chosen_second_phonetic)])}')
 
     else:
         raise RuntimeError('Algorithm not yet implemented.')
