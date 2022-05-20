@@ -53,7 +53,7 @@ if transcribe_button:
 
         dist = lev_arrays(first_phonetic, second_phonetic)
         st.write(f'Levenshtein distance (applied on the phonemes): {dist}')
-        st.write(f'Average percentage error: {dist / np.average([len(first_phonetic), len(second_phonetic)])}')
+        st.write(f'Average percentage error: {dist / np.average([len(first_phonetic), len(second_phonetic)]) * 100}%')
 
     elif algo == 'Double Metaphone':
         first_phonetics = list(filter(len, doublemetaphone(first_input)))
@@ -79,7 +79,7 @@ if transcribe_button:
                     chosen_second_phonetic = phonetic2
 
         st.write(f'Chosen phonetic transcriptions for a minimum Levenshtein distance of {min_error}: {chosen_first_phonetic} and {chosen_second_phonetic}')
-        st.write(f'Average percentage error: {min_error / np.average([len(chosen_first_phonetic), len(chosen_second_phonetic)])}')
+        st.write(f'Average percentage error: {min_error / np.average([len(chosen_first_phonetic), len(chosen_second_phonetic)]) * 100}%')
 
     else:
         raise RuntimeError('Algorithm not yet implemented.')
